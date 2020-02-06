@@ -17,6 +17,7 @@
 		BE22B3F123EC6E9E0087A37D /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE22B3F023EC6E9E0087A37D /* SettingsViewController.swift */; };
 		BE22B3F323EC6F010087A37D /* SavedArticlesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE22B3F223EC6F010087A37D /* SavedArticlesController.swift */; };
 		BE22B3F623EC71E60087A37D /* NewsFeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE22B3F523EC71E60087A37D /* NewsFeedView.swift */; };
+		BE22B3FD23EC7A7A0087A37D /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE22B3FC23EC7A7A0087A37D /* Config.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +45,7 @@
 		BE22B3F023EC6E9E0087A37D /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		BE22B3F223EC6F010087A37D /* SavedArticlesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedArticlesController.swift; sourceTree = "<group>"; };
 		BE22B3F523EC71E60087A37D /* NewsFeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsFeedView.swift; sourceTree = "<group>"; };
+		BE22B3FC23EC7A7A0087A37D /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +87,7 @@
 		BE22B3C423EC6C5E0087A37D /* NYTTopStoriesReview */ = {
 			isa = PBXGroup;
 			children = (
+				BE22B3FB23EC7A680087A37D /* Config */,
 				BE22B3F423EC71BC0087A37D /* Views */,
 				BE22B3EC23EC6E1E0087A37D /* Controllers */,
 				BE22B3EB23EC6DF70087A37D /* Supporting Files */,
@@ -130,6 +133,14 @@
 				BE22B3F523EC71E60087A37D /* NewsFeedView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		BE22B3FB23EC7A680087A37D /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				BE22B3FC23EC7A7A0087A37D /* Config.swift */,
+			);
+			path = Config;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -237,6 +248,7 @@
 				BE22B3EA23EC6D770087A37D /* TabBarController.swift in Sources */,
 				BE22B3C623EC6C5E0087A37D /* AppDelegate.swift in Sources */,
 				BE22B3F623EC71E60087A37D /* NewsFeedView.swift in Sources */,
+				BE22B3FD23EC7A7A0087A37D /* Config.swift in Sources */,
 				BE22B3F123EC6E9E0087A37D /* SettingsViewController.swift in Sources */,
 				BE22B3C823EC6C5E0087A37D /* SceneDelegate.swift in Sources */,
 			);
