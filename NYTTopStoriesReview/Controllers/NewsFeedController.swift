@@ -11,7 +11,8 @@ import UIKit
 class NewsFeedController: UIViewController {
     
     var newsFeedView = NewsFeedView()
-    
+        
+    var newsCell = NewsCell()
 
     
     override func loadView() {
@@ -24,6 +25,7 @@ class NewsFeedController: UIViewController {
         newsFeedView.collectionView.dataSource = self
         newsFeedView.collectionView.delegate = self
         newsFeedView.collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "articleCell")
+        newsFeedView.collectionView.register(NewsCell.self, forCellWithReuseIdentifier: "articleCell")
     }
     
 }
@@ -34,8 +36,11 @@ extension NewsFeedController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "articleCell", for: indexPath)
-        cell.backgroundColor = .systemRed
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "articleCell", for: indexPath) as? NewsCell else {
+            fatalError("could not get cell")
+        }
+        
+        cell.backgroundColor = .systemBackground
         return cell
     }
 }

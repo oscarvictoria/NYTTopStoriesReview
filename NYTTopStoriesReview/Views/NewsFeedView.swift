@@ -14,7 +14,7 @@ class NewsFeedView: UIView {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
         let cv = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
-        cv.backgroundColor = .systemBlue
+        cv.backgroundColor = .systemGroupedBackground
         return cv
     }()
     
