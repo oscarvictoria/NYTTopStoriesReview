@@ -13,6 +13,14 @@ class NewsFeedController: UIViewController {
     var newsFeedView = NewsFeedView()
         
     var newsCell = NewsCell()
+    
+    var newsArticles = [Article]() {
+        didSet {
+            DispatchQueue.main.async {
+                self.newsFeedView.collectionView.reloadData()
+            }
+        }
+    }
 
     
     override func loadView() {
@@ -26,20 +34,35 @@ class NewsFeedController: UIViewController {
         newsFeedView.collectionView.delegate = self
         newsFeedView.collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "articleCell")
         newsFeedView.collectionView.register(NewsCell.self, forCellWithReuseIdentifier: "articleCell")
+        fetchStories()
+        
+    }
+    
+    func fetchStories(for section: String = "Technology") {
+        TopStoriesAPIClient.getStories(for: section) { (result) in
+            switch result {
+            case .failure(let appError):
+                print("app error \(appError)")
+            case .success(let article):
+                self.newsArticles = article
+                print(article.count)
+            }
+        }
     }
     
 }
 
 extension NewsFeedController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return newsArticles.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "articleCell", for: indexPath) as? NewsCell else {
             fatalError("could not get cell")
         }
-        
+        let article = newsArticles[indexPath.row]
+        cell.configureCell(with: article)
         cell.backgroundColor = .systemBackground
         return cell
     }

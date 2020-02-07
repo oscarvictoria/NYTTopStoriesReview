@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import ImageKit
 
 class NewsCell: UICollectionViewCell {
     
@@ -79,5 +80,20 @@ class NewsCell: UICollectionViewCell {
             abstractHeadline.trailingAnchor.constraint(equalTo: articleTitle.trailingAnchor),
             abstractHeadline.topAnchor.constraint(equalTo: articleTitle.bottomAnchor, constant: 8)
         ])
+    }
+    
+    public func configureCell(with article: Article) {
+        articleTitle.text = article.title
+        abstractHeadline.text = article.abstract
+        newsImageView.getImage(with: article.getArticleImageURL(for: .thumbLarge)) { (result) in
+            switch result {
+            case .failure(let error):
+                print("error \(error)")
+            case .success(let image):
+                DispatchQueue.main.async {
+                    self.newsImageView.image = image
+                }
+            }
+        }
     }
 }
