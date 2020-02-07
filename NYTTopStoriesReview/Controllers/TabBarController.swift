@@ -7,20 +7,32 @@
 //
 
 import UIKit
+import DataPersistence
 
 class TabBarController: UITabBarController {
+    
+    // Step 1: In order for your data persistance to work your model must conform to equatable
+    private var dataPersistance = DataPersistence<Article>(filename: "savedArticles.plist")
+    
     
     private lazy var neewsFeedVC: NewsFeedController = {
         let viewController = NewsFeedController()
         viewController.tabBarItem = UITabBarItem(title: "News Feed", image: UIImage(systemName: "eyeglasses"), tag: 0)
+        // Step 3: We inject
+        viewController.dataPersistance = dataPersistance
         return viewController
     }()
     
+    
     private lazy var savedArticlesVC: SavedArticlesController = {
-           let viewController = SavedArticlesController()
-           viewController.tabBarItem = UITabBarItem(title: "Saved", image: UIImage(systemName: "folder"), tag: 0)
-           return viewController
-       }()
+        let viewController = SavedArticlesController()
+        viewController.tabBarItem = UITabBarItem(title: "Saved", image: UIImage(systemName: "folder"), tag: 0)
+        // Step 3: We inject
+        viewController.dataPersistance = dataPersistance
+        // setting up data persistance and its delegate
+        viewController.dataPersistance.delegate = viewController
+        return viewController
+    }()
     
     
     private lazy var settingsVC: SettingsViewController = {
@@ -28,16 +40,18 @@ class TabBarController: UITabBarController {
         viewController.tabBarItem = UITabBarItem(title: "Settings", image: UIImage(systemName: "gear"), tag: 0)
         return viewController
     }()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemRed
         
-        viewControllers = [neewsFeedVC, savedArticlesVC, settingsVC]
+        viewControllers = [UINavigationController(rootViewController: neewsFeedVC),
+                           UINavigationController(rootViewController: savedArticlesVC),
+                           UINavigationController(rootViewController: settingsVC)]
         
         
     }
     
-
-
+    
+    
 }

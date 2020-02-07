@@ -7,8 +7,12 @@
 //
 
 import UIKit
+import DataPersistence
 
 class NewsFeedController: UIViewController {
+    
+    // Step 2: we are not creating a new instace meaning we are not using " = "
+    public var dataPersistance: DataPersistence<Article>!
     
     var newsFeedView = NewsFeedView()
         
@@ -74,5 +78,14 @@ extension NewsFeedController: UICollectionViewDelegateFlowLayout {
         let itemWidth: CGFloat = maxSize.width
         let itemHeight: CGFloat = maxSize.height * 0.30
         return CGSize(width: itemWidth, height: itemHeight)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let articles = newsArticles[indexPath.row]
+        let detailVC = ArticleDetailViewController()
+        detailVC.articles = articles
+        // Step 4: Pass information
+        detailVC.dataPersistance = dataPersistance
+        navigationController?.pushViewController(detailVC, animated: true)
     }
 }
