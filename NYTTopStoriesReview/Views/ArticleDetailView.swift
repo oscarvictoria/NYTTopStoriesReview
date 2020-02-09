@@ -43,7 +43,7 @@ class ArticleDetailView: UIView {
     
     
     private func configureImageView() {
-         addSubview(newsImageView)
+        addSubview(newsImageView)
         newsImageView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             newsImageView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
@@ -58,8 +58,8 @@ class ArticleDetailView: UIView {
         abstractHeadline.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             abstractHeadline.topAnchor.constraint(equalTo: newsImageView.bottomAnchor, constant: 8),
-            abstractHeadline.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
-            abstractHeadline.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8)
+            abstractHeadline.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 8),
+    abstractHeadline.trailingAnchor.constraint(equalTo:safeAreaLayoutGuide.trailingAnchor, constant: -8)
         ])
     }
     

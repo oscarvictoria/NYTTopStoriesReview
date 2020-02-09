@@ -34,6 +34,7 @@ class NewsFeedController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
+//        navigationController?.title = "Top Stories"
         newsFeedView.collectionView.dataSource = self
         newsFeedView.collectionView.delegate = self
         newsFeedView.collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "articleCell")
