@@ -28,6 +28,7 @@
 		BE61847A23EDD14500CA891A /* ArticleDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE61847923EDD14500CA891A /* ArticleDetailView.swift */; };
 		BE61848A23EF843100CA891A /* SavedArticlesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE61848923EF843100CA891A /* SavedArticlesView.swift */; };
 		BE61848C23EF8D9700CA891A /* SavedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE61848B23EF8D9700CA891A /* SavedCell.swift */; };
+		BE61848F23EF95F200CA891A /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE61848E23EF95F200CA891A /* SettingsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +64,7 @@
 		BE61847923EDD14500CA891A /* ArticleDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleDetailView.swift; sourceTree = "<group>"; };
 		BE61848923EF843100CA891A /* SavedArticlesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedArticlesView.swift; sourceTree = "<group>"; };
 		BE61848B23EF8D9700CA891A /* SavedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedCell.swift; sourceTree = "<group>"; };
+		BE61848E23EF95F200CA891A /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -160,6 +162,7 @@
 				BE61848B23EF8D9700CA891A /* SavedCell.swift */,
 				BE61847923EDD14500CA891A /* ArticleDetailView.swift */,
 				BE61848923EF843100CA891A /* SavedArticlesView.swift */,
+				BE61848E23EF95F200CA891A /* SettingsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -305,6 +308,7 @@
 				BE22B3C623EC6C5E0087A37D /* AppDelegate.swift in Sources */,
 				BE22B3F623EC71E60087A37D /* NewsFeedView.swift in Sources */,
 				BE22B3FD23EC7A7A0087A37D /* Config.swift in Sources */,
+				BE61848F23EF95F200CA891A /* SettingsView.swift in Sources */,
 				BE61848A23EF843100CA891A /* SavedArticlesView.swift in Sources */,
 				BE61848C23EF8D9700CA891A /* SavedCell.swift in Sources */,
 				BE22B40D23EC871D0087A37D /* TopStoriesAPIClient.swift in Sources */,
