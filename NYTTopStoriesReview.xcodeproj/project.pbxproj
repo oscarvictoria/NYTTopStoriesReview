@@ -29,6 +29,7 @@
 		BE61848A23EF843100CA891A /* SavedArticlesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE61848923EF843100CA891A /* SavedArticlesView.swift */; };
 		BE61848C23EF8D9700CA891A /* SavedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE61848B23EF8D9700CA891A /* SavedCell.swift */; };
 		BE61848F23EF95F200CA891A /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE61848E23EF95F200CA891A /* SettingsView.swift */; };
+		BE61849123F1B34800CA891A /* EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE61849023F1B34800CA891A /* EmptyView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +66,7 @@
 		BE61848923EF843100CA891A /* SavedArticlesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedArticlesView.swift; sourceTree = "<group>"; };
 		BE61848B23EF8D9700CA891A /* SavedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedCell.swift; sourceTree = "<group>"; };
 		BE61848E23EF95F200CA891A /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		BE61849023F1B34800CA891A /* EmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -163,6 +165,7 @@
 				BE61847923EDD14500CA891A /* ArticleDetailView.swift */,
 				BE61848923EF843100CA891A /* SavedArticlesView.swift */,
 				BE61848E23EF95F200CA891A /* SettingsView.swift */,
+				BE61849023F1B34800CA891A /* EmptyView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -306,6 +309,7 @@
 				BE22B3EF23EC6E840087A37D /* NewsFeedController.swift in Sources */,
 				BE22B3EA23EC6D770087A37D /* TabBarController.swift in Sources */,
 				BE22B3C623EC6C5E0087A37D /* AppDelegate.swift in Sources */,
+				BE61849123F1B34800CA891A /* EmptyView.swift in Sources */,
 				BE22B3F623EC71E60087A37D /* NewsFeedView.swift in Sources */,
 				BE22B3FD23EC7A7A0087A37D /* Config.swift in Sources */,
 				BE61848F23EF95F200CA891A /* SettingsView.swift in Sources */,

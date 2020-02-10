@@ -48,10 +48,6 @@ class TabBarController: UITabBarController {
         viewControllers = [UINavigationController(rootViewController: neewsFeedVC),
                            UINavigationController(rootViewController: savedArticlesVC),
                            UINavigationController(rootViewController: settingsVC)]
-        
-        
     }
-    
-    
     
 }

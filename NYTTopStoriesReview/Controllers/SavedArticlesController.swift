@@ -26,15 +26,20 @@ class SavedArticlesController: UIViewController {
             DispatchQueue.main.async {
                 self.savedArticlesView.collectionView.reloadData()
             }
-            print("there are \(savedArticles.count) articles saved")
+            if savedArticles.isEmpty {
+                // set up pur empty view here
+                savedArticlesView.collectionView.backgroundView = EmptyView(title: "Saved Articles", message: "There are currently no saved articles.")
+            } else {
+                savedArticlesView.collectionView.backgroundView = nil
+            }
         }
     }
     
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
-//        navigationController?.title = "Saved Articles"
+        //        navigationController?.title = "Saved Articles"
         fetchSavedArticles()
         savedArticlesView.collectionView.dataSource = self
         savedArticlesView.collectionView.delegate = self
@@ -53,11 +58,11 @@ class SavedArticlesController: UIViewController {
 
 extension SavedArticlesController: DataPersistenceDelegate {
     func didSaveItem<T>(_ persistenceHelper: DataPersistence<T>, item: T) where T : Decodable, T : Encodable, T : Equatable {
-        print("item was saved")
+        fetchSavedArticles()
     }
     
     func didDeleteItem<T>(_ persistenceHelper: DataPersistence<T>, item: T) where T : Decodable, T : Encodable, T : Equatable {
-        print("item was deleted")
+        fetchSavedArticles()
     }
 }
 
@@ -70,8 +75,11 @@ extension SavedArticlesController: UICollectionViewDataSource {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "savedCell", for: indexPath) as? SavedCell else  {
             fatalError("could not get cell")
         }
+        cell.delegate = self
         let article = savedArticles[indexPath.row]
+        cell.currentArticle = article
         cell.backgroundColor = .tertiarySystemBackground
+        
         cell.articleTitle.text = article.title
         return cell
     }
@@ -80,10 +88,22 @@ extension SavedArticlesController: UICollectionViewDataSource {
 
 extension SavedArticlesController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let padding: CGFloat =  15
-        let collectionViewSize = collectionView.frame.size.width - padding
-
-        return CGSize(width: collectionViewSize/2, height: collectionViewSize/2)
+        //        let padding: CGFloat =  15
+        //        let collectionViewSize = collectionView.frame.size.width - padding
+        //
+        //        return CGSize(width: collectionViewSize/2, height: collectionViewSize/2)
+        
+        let maxSize: CGSize = UIScreen.main.bounds.size
+        let spacingBetweenItems: CGFloat = 10
+        let numberOfItems: CGFloat = 2
+        let itemHeight: CGFloat = maxSize.height * 0.30
+        let totalSpacing: CGFloat = (2 * spacingBetweenItems) + (numberOfItems - 1) * spacingBetweenItems
+        let itemWidth: CGFloat = (maxSize.width - totalSpacing) / numberOfItems
+        return CGSize(width: itemWidth, height: itemHeight)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -94,3 +114,37 @@ extension SavedArticlesController: UICollectionViewDelegateFlowLayout {
     }
     
 }
+
+extension SavedArticlesController: SavedArticleCellDelagate {
+    func didSelectMoreButton(_ SavedArticleCell: SavedCell, article: Article) {
+        print("did select more button")
+        
+        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        let deleteAction = UIAlertAction(title: "Delete", style: .destructive)  { alertAction in
+            self.deleteArticle(article)
+        }
+        
+        alertController.addAction(cancelAction)
+        alertController.addAction(deleteAction)
+        present(alertController, animated: true)
+        
+    }
+    
+    private func deleteArticle(_ article: Article) {
+        guard let index = savedArticles.firstIndex(of: article) else {
+            return
+        }
+        
+        do {
+            try dataPersistance.deleteItem(at: index)
+        } catch {
+            print("error")
+        }
+    }
+    
+}
+
+
+
+

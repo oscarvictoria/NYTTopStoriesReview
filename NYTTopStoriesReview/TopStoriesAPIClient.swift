@@ -13,7 +13,7 @@ struct TopStoriesAPIClient {
     
     static func getStories(for section: String, completion: @escaping (Result <[Article],AppError>)-> ()) {
         
-        let endpointURLString = "https://api.nytimes.com/svc/topstories/v2/nyregion.json?api-key=\(Config.apiKey)"
+        let endpointURLString = "https://api.nytimes.com/svc/topstories/v2/\(section).json?api-key=\(Config.apiKey)"
         
         guard let url = URL(string: endpointURLString) else {
             completion(.failure(.badURL(endpointURLString)))

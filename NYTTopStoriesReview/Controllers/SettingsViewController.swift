@@ -8,7 +8,18 @@
 
 import UIKit
 
+protocol SectionsDelegate: AnyObject {
+    func setSectionName(_ section: String)
+}
+
+struct AppKey {
+    static let sectionName = "Section"
+    static let sectionIndex = ""
+}
+
 class SettingsViewController: UIViewController {
+    
+    weak var delegate: SectionsDelegate?
     
     var settingView = SettingsView()
     
@@ -23,6 +34,15 @@ class SettingsViewController: UIViewController {
         view.backgroundColor = .systemBackground
         settingView.pickerView.dataSource = self
         settingView.pickerView.delegate = self
+        saveSection()
+    }
+    
+    func saveSection() {
+        if let sectionName = UserDefaults.standard.object(forKey: AppKey.sectionName) as? String,
+        let index = UserDefaults.standard.object(forKey: AppKey.sectionIndex) as? Int  {
+            navigationController?.title = sectionName
+            settingView.pickerView.selectRow(index, inComponent: 0, animated: true)
+        }
     }
     
 }
@@ -42,5 +62,14 @@ extension SettingsViewController: UIPickerViewDataSource {
 extension SettingsViewController: UIPickerViewDelegate {
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return topStories[row]
+        
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        let section = topStories[row]
+        delegate?.setSectionName(section)
+        
+        UserDefaults.standard.set(section, forKey: AppKey.sectionName)
+        UserDefaults.standard.set(row, forKey: AppKey.sectionIndex)
     }
 }
