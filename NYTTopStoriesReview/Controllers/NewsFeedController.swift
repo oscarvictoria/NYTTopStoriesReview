@@ -50,8 +50,10 @@ class NewsFeedController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
+        navigationItem.title = "Top Stories"
         newsFeedView.collectionView.dataSource = self
         newsFeedView.collectionView.delegate = self
+        newsFeedView.searchBar.delegate = self
         newsFeedView.collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "articleCell")
         newsFeedView.collectionView.register(NewsCell.self, forCellWithReuseIdentifier: "articleCell")
         configureRefreshControl()
@@ -67,6 +69,8 @@ class NewsFeedController: UIViewController {
         if let sectionName = UserDefaults.standard.object(forKey: AppKey.sectionName) as? String {
             if sectionName != self.sections {
                 self.sections = sectionName
+                queryAPI(for: sectionName)
+            } else {
                 queryAPI(for: sectionName)
             }
         } else {
@@ -124,10 +128,27 @@ extension NewsFeedController: UICollectionViewDelegateFlowLayout {
         detailVC.dataPersistance = dataPersistance
         navigationController?.pushViewController(detailVC, animated: true)
     }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if newsFeedView.searchBar.isFirstResponder {
+            newsFeedView.searchBar.resignFirstResponder()
+        }
+    }
 }
 
 extension NewsFeedController: SectionsDelegate {
     func setSectionName(_ section: String) {
         self.sections = section
+    }
+}
+
+extension NewsFeedController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        guard !searchText.isEmpty else {
+            fetchStories()
+            return
+        }
+        // filter articel based on searchText
+        newsArticles = newsArticles.filter { $0.title.lowercased().contains(searchText.lowercased())}
     }
 }

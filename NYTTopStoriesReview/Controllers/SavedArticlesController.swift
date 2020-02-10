@@ -39,7 +39,7 @@ class SavedArticlesController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
-        //        navigationController?.title = "Saved Articles"
+        navigationItem.title = "Saved Articles"
         fetchSavedArticles()
         savedArticlesView.collectionView.dataSource = self
         savedArticlesView.collectionView.delegate = self
@@ -110,9 +110,9 @@ extension SavedArticlesController: UICollectionViewDelegateFlowLayout {
         let articles = savedArticles[indexPath.row]
         let detailVC = ArticleDetailViewController()
         detailVC.articles = articles
+        detailVC.dataPersistance = dataPersistance
         navigationController?.pushViewController(detailVC, animated: true)
     }
-    
 }
 
 extension SavedArticlesController: SavedArticleCellDelagate {
