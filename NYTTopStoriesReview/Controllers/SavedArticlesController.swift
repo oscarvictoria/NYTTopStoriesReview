@@ -12,9 +12,19 @@ import DataPersistence
 class SavedArticlesController: UIViewController {
     
     // Step 2: we are not creating a new instace meaning we are not using " = "
-    public var dataPersistance: DataPersistence<Article>!
+    private var dataPersistance: DataPersistence<Article>
     
     var savedArticlesView = SavedArticlesView()
+    
+    init(_ dataPersistance: DataPersistence<Article>) {
+        self.dataPersistance = dataPersistance
+        super.init(nibName: nil, bundle: nil)
+        self.dataPersistance.delegate = self
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     
     override func loadView() {
@@ -108,9 +118,7 @@ extension SavedArticlesController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let articles = savedArticles[indexPath.row]
-        let detailVC = ArticleDetailViewController()
-        detailVC.articles = articles
-        detailVC.dataPersistance = dataPersistance
+        let detailVC = ArticleDetailViewController(dataPersistance, article: articles)
         navigationController?.pushViewController(detailVC, animated: true)
     }
 }
@@ -135,13 +143,14 @@ extension SavedArticlesController: SavedArticleCellDelagate {
         guard let index = savedArticles.firstIndex(of: article) else {
             return
         }
-        
         do {
             try dataPersistance.deleteItem(at: index)
         } catch {
             print("error")
         }
     }
+    
+
     
 }
 

@@ -111,8 +111,6 @@
 		BE22B3C423EC6C5E0087A37D /* NYTTopStoriesReview */ = {
 			isa = PBXGroup;
 			children = (
-				BE22B40C23EC871D0087A37D /* TopStoriesAPIClient.swift */,
-				BE22B40023EC853D0087A37D /* TopStories.swift */,
 				BE22B40223EC865C0087A37D /* Network Services */,
 				BE22B3FF23EC85200087A37D /* Models */,
 				BE22B3FB23EC7A680087A37D /* Config */,
@@ -181,6 +179,7 @@
 		BE22B3FF23EC85200087A37D /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				BE22B40023EC853D0087A37D /* TopStories.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -188,6 +187,7 @@
 		BE22B40223EC865C0087A37D /* Network Services */ = {
 			isa = PBXGroup;
 			children = (
+				BE22B40C23EC871D0087A37D /* TopStoriesAPIClient.swift */,
 			);
 			path = "Network Services";
 			sourceTree = "<group>";

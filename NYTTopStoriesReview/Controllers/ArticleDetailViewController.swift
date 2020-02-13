@@ -13,15 +13,26 @@ import DataPersistence
 class ArticleDetailViewController: UIViewController {
     
     // we are not creating a new instace meaning we are not using " = "
-    public var dataPersistance: DataPersistence<Article>!
+    private var dataPersistance: DataPersistence<Article>
+    
+    private var articles: Article
     
     var detailView = ArticleDetailView()
+    
+    init(_ dataPersistance: DataPersistence<Article>, article: Article) {
+        self.dataPersistance = dataPersistance
+        self.articles = article
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func loadView() {
         view = detailView
     }
     
-    var articles: Article?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,11 +42,8 @@ class ArticleDetailViewController: UIViewController {
     }
     
     func updateUI() {
-        guard let article = articles else {
-            fatalError("did not load an article")
-        }
-        detailView.abstractHeadline.text = article.abstract
-        detailView.newsImageView.getImage(with: article.getArticleImageURL(for: .superJumbo)) { (result) in
+        detailView.abstractHeadline.text = articles.abstract
+        detailView.newsImageView.getImage(with: articles.getArticleImageURL(for: .superJumbo)) { (result) in
             switch result {
             case .failure(let error):
                 print("app error \(error)")
@@ -45,18 +53,14 @@ class ArticleDetailViewController: UIViewController {
                 }
             }
         }
-        navigationItem.title = article.title
+        navigationItem.title = articles.title
         navigationController?.navigationBar.prefersLargeTitles = true
     }
     
     @objc func save() {
-        guard let article = articles else {
-            print("some error")
-            return
-        }
         // Step 5: Save to documents directory
         do {
-           try dataPersistance.createItem(article)
+           try dataPersistance.createItem(articles)
         } catch {
             print("error saving article \(error)")
         }

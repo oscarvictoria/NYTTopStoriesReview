@@ -106,6 +106,8 @@ class SavedCell: UICollectionViewCell {
         @objc private func moreButtonPressed(_ sender: UIButton) {
             delegate?.didSelectMoreButton(self, article: currentArticle)
         }
+    
+  
         
         private func configureTitle() {
             addSubview(articleTitle)

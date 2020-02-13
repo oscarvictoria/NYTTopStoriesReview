@@ -14,23 +14,18 @@ class TabBarController: UITabBarController {
     // Step 1: In order for your data persistance to work your model must conform to equatable
     private var dataPersistance = DataPersistence<Article>(filename: "savedArticles.plist")
     
-    
     private lazy var neewsFeedVC: NewsFeedController = {
-        let viewController = NewsFeedController()
+        let viewController = NewsFeedController(dataPersistance)
         viewController.tabBarItem = UITabBarItem(title: "News Feed", image: UIImage(systemName: "eyeglasses"), tag: 0)
-        // Step 3: We inject
-        viewController.dataPersistance = dataPersistance
         return viewController
     }()
     
     
     private lazy var savedArticlesVC: SavedArticlesController = {
-        let viewController = SavedArticlesController()
+        let viewController = SavedArticlesController(dataPersistance)
         viewController.tabBarItem = UITabBarItem(title: "Saved", image: UIImage(systemName: "folder"), tag: 0)
         // Step 3: We inject
-        viewController.dataPersistance = dataPersistance
         // setting up data persistance and its delegate
-        viewController.dataPersistance.delegate = viewController
         return viewController
     }()
     

@@ -12,7 +12,7 @@ import DataPersistence
 class NewsFeedController: UIViewController {
     
     // Step 2: we are not creating a new instace meaning we are not using " = "
-    public var dataPersistance: DataPersistence<Article>!
+    private var dataPersistance: DataPersistence<Article>
     
     private var refreshControl: UIRefreshControl!
     
@@ -41,6 +41,14 @@ class NewsFeedController: UIViewController {
         }
     }
     
+    init(_ dataPersistance: DataPersistence<Article>) {
+        self.dataPersistance = dataPersistance
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func loadView() {
         view = newsFeedView
@@ -54,7 +62,7 @@ class NewsFeedController: UIViewController {
         newsFeedView.collectionView.dataSource = self
         newsFeedView.collectionView.delegate = self
         newsFeedView.searchBar.delegate = self
-        newsFeedView.collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "articleCell")
+//        newsFeedView.collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "articleCell")
         newsFeedView.collectionView.register(NewsCell.self, forCellWithReuseIdentifier: "articleCell")
         configureRefreshControl()
     }
@@ -122,10 +130,8 @@ extension NewsFeedController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let articles = newsArticles[indexPath.row]
-        let detailVC = ArticleDetailViewController()
-        detailVC.articles = articles
+        let detailVC = ArticleDetailViewController(dataPersistance, article: articles)
         // Step 4: Pass information
-        detailVC.dataPersistance = dataPersistance
         navigationController?.pushViewController(detailVC, animated: true)
     }
     
